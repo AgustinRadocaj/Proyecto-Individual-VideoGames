@@ -1,9 +1,15 @@
 import './App.css';
+import { Route, Routes } from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
-      <h1>Henry Videogames</h1>
+      <Routes>
+        <Route path='/'></Route>
+        <Route path='/home'></Route>
+        <Route path='/detail'></Route>
+        <Route path='form'></Route>
+      </Routes>
     </div>
   );
 }
