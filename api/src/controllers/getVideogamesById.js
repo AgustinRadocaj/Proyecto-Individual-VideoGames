@@ -1,5 +1,5 @@
 const axios = require('axios');
-URL = "https://api.rawg.io/api/games/"
+const URL = "https://api.rawg.io/api/games/"
 
 const getVideogameById = async (req, res) => {
     const { id } = req.params
