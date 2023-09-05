@@ -1,7 +1,7 @@
-const detail = () => {
+const Detail = () => {
 return (
     <div className="container">
-        <div className="imagen"><img>Imagen.</img></div>
+        <div className="imagen"><img alt="">Imagen.</img></div>
         <div>
             <h2>ID</h2>
             <h2>Nombre.</h2>
@@ -15,5 +15,5 @@ return (
 )
 }
             
-export default detail
+export default Detail
 

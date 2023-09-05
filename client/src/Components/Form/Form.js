@@ -1,12 +1,12 @@
-const form = () => {
+const Form = () => {
     return (
         <form>
             <label>Nombre</label>
             <input type="text" name="Nombre"/>
-            //falta Imagen
+           
             <label>Descripción</label>
             <input type="text" name="Descripcion"/>
-            //botones para elegir las Plataformas
+           
             <label>Fecha de lanzamiento</label>
             <input type="date" name="fecha_lanzamiento"/>       
             <label>Rating</label>
@@ -20,4 +20,4 @@ const form = () => {
     )
 }
 
-export default form
+export default Form

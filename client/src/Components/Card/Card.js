@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Card = ({id, image, name, genres}) =>{
 
     return (

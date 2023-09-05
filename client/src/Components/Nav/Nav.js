@@ -1,6 +1,13 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation} from "react-router-dom";
 
 const Nav = () => {
+    const location = useLocation();
+
+    const miLocation = location.pathname === "/";
+
+    if(miLocation){
+      return null;
+    }
     return(
         <div className="nav">
             <button>
@@ -17,3 +24,5 @@ const Nav = () => {
 }
 
 export default Nav
+    
+    
