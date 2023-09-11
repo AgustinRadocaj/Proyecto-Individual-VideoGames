@@ -1,3 +1,4 @@
+import axios from "axios"
 export const alfaOrder = (orden) => ({
     type: "ALFA_ORDER",
     payload: orden
@@ -20,3 +21,10 @@ export const origin = (filter) => ({
 })
 // filtro genero y origen
 
+export const getGames = () => {
+    return async function (dispatch){
+        const response = await axios.get("http://localhost:3001/videogames");
+        const games = response.data
+        dispatch({type: "GET_GAMES", payload: games})
+    }
+}

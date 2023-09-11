@@ -25,7 +25,7 @@ const createVideogame = (req, res) => {
     };
 
     // Agregar el videojuego a la base de datos
-    Videogame.push(nuevoVideojuego);
+    Videogame.create(nuevoVideojuego);
 
     res.status(201).json(nuevoVideojuego);
 };

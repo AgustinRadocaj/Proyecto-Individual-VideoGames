@@ -17,9 +17,9 @@ const reducer = (state = initialState, action) => {
         case "RATING_ORDER":
            const ratingSort = [...state.games]
            if(action.payload === "A"){
-            alfaSort.sort((a, b) => a.rating - b.rating)
+            ratingSort.sort((a, b) => a.rating - b.rating)
             } else if (action.payload === "D"){
-            alfaSort.sort((a, b) => b.rating - a.rating)
+            ratingSort.sort((a, b) => b.rating - a.rating)
             }
             return {...state, games: ratingSort}
 
@@ -37,7 +37,8 @@ const reducer = (state = initialState, action) => {
                 return true;
               });
             return { ...state, games: byOrigin };
-        
+        case "GET_GAMES":
+          return {...state, games: action.payload}
         default:
               return state;
     }

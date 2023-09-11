@@ -1,38 +1,30 @@
-import React, {useEffect, useState} from "react"
+import React, {useEffect} from "react"
+import {useDispatch, useSelector} from "react-redux"
 import Filtros from "../Filtros/Filtros"
-import Card from "../Card/Card"
-import axios from "axios"
-const DB_API_KEY = process.env.DB_API_KEY;
+import Cards from "../Cards/Cards"
+import { getGames } from "../../Redux/actions"
+import styles from "./Display.module.css"
 
 const Display = () => {
 
-    const [juegos, setJuegos] = useState([])
-
-    useEffect(() => {
-        axios.get(URL + '?key=' + DB_API_KEY)
-        .then((response) => {
-            setJuegos(response.data.results);
-        })
-        .catch((error) => {
-            console.log("Error", error);
-          });
-      }, []);
+    const dispatch = useDispatch()
+    const games = useSelector((state) => state.games);
+    
+    useEffect(()=>{
+        dispatch(getGames())
+    }, [])
+    
     
     return(
         <div>
             <Filtros/>
-            <div className="juegos">
-                {juegos.map((game) => (
-                    <Card 
-                    key={game.id}
-                    Nombre={game.name}
-                    Imagen={game.background_image}
-                    Generos={game.genres}
-                    />
-                ))}   
+            <div className={styles.gamesContainer}>
+                <Cards games={games}/>    
             </div>
         </div>
     )
 }
 
 export default Display;
+
+

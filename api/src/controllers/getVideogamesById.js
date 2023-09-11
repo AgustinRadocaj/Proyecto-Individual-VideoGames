@@ -15,9 +15,11 @@ const getVideogameById = async (req, res) => {
             Descripción: data.description,
             Plataformas: data.platforms,
             Imagen: data.background_image,
-            Fecha_de_lanzamiento: data.released,
-            Rating: data.rating
+            Lanzamiento: data.released,
+            Rating: data.rating,
+            Generos: data.genres
         };
+        console.log(data.platforms)
         res.json(game);
     } catch (error) {
         res.json(error.message);
