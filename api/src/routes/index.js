@@ -7,14 +7,14 @@ const genres = require("../controllers/genres");
 const router = Router();
 
 
-router.get("/videogames", getVideogames);
+router.get("/videogames", getVideogames); 
 
-router.get("/videogames/:idVideogame", getVideogameById);
+router.get("/videogames/:idVideogame", getVideogameById); 
 
-router.get("/videogames/name?='...'", getVideogameByName);
+router.get("/videogames/name/:name", getVideogameByName); 
 
-router.post("/videogames", createVideogame);
+router.post("/videogames", createVideogame); 
 
-router.get("/genres", genres);
+router.get("/genres", genres);  
 
 module.exports = router;

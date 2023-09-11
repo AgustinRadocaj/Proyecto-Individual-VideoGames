@@ -1,21 +1,23 @@
 const axios = require('axios');
 const URL = "https://api.rawg.io/api/games/"
+//https://api.rawg.io/api/games/{id}"
+
 
 const getVideogameById = async (req, res) => {
-    const { id } = req.params
-
+    const  id  = req.params.idVideogame;
+    
     try {
-        const response = await axios.get(`${URL}${id}`);
+        const response = await axios.get(`${URL}${id}`+ '?key=' + process.env.DB_API_KEY);
         const data = response.data;
         const game = {
             id: data.id,
-            Nombre: data.Nombre, 
-            Descripción: data.Descripción,
-            Plataformas: data.Plataformas, 
-            Imagen: data.Imagen, 
-            Fecha_de_lanzamiento: data.Fecha_de_lanzamiento, 
-            Rating: data.Rating
-        }
+            Nombre: data.name,
+            Descripción: data.description,
+            Plataformas: data.platforms,
+            Imagen: data.background_image,
+            Fecha_de_lanzamiento: data.released,
+            Rating: data.rating
+        };
         res.json(game);
     } catch (error) {
         res.json(error.message);

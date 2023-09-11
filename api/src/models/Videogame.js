@@ -1,41 +1,38 @@
 const { DataTypes } = require('sequelize');
-// Exportamos una funcion que define el modelo
-// Luego le injectamos la conexion a sequelize.
+
+
 module.exports = (sequelize) => {
-  // defino el modelo
-  sequelize.define('videogame', {
-    ID:{
-      type: DataTypes.INTEGER,
-      unique: true,
-      allowNull: false,
-    },
-    Nombre:{
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    Descripción:{
-      type: DataTypes.TEXT,
-      allowNull: false
-    },
-    Plataformas:{
-      type: DataTypes.ENUM("PlayStation", "PC", "SWITCH", "XBOX"),
-      allowNull: false
-    },
-    Imagen:{
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    Fecha_de_lanzamiento:{
-      type: DataTypes.DATE,
-      allowNull: false
-    },
-    Rating:{
-      type: DataTypes.DECIMAL,
-      allowNull: false,
-      validate:{
-        min: 0,
-        max: 10
-      }
-    }
-  });
-};
+  sequelize.define('Videogame', {
+  customId: {
+    type: DataTypes.UUID, 
+    defaultValue: DataTypes.UUIDV4,
+    primaryKey: true,
+    allowNull: false,
+    unique: true,
+  },
+  nombre: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  descripcion: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+  plataformas: {
+    type: DataTypes.JSONB, 
+    allowNull: false,
+  },
+  imagen: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  fechaLanzamiento: {
+    type: DataTypes.DATE,
+    allowNull: false,
+  },
+  rating: {
+    type: DataTypes.FLOAT,
+    allowNull: false,
+  },
+})};
+
