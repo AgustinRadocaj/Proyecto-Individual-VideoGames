@@ -10,12 +10,12 @@ export const ratingOrder = (orden) => ({
 })
 // orden alfabetico por nombre y rating
 
-export const genre = (filter) => ({
+export const genreFilter = (filter) => ({
     type: "GENRE",
     payload: filter
 })
 
-export const origin = (filter) => ({
+export const originFilter = (filter) => ({
     type :"ORIGIN",
     payload:  filter
 })

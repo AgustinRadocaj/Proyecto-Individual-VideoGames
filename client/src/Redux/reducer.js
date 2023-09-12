@@ -1,5 +1,6 @@
 const initialState = {
-    games: []
+    games: [], 
+    genres: []
 }
 
 const reducer = (state = initialState, action) => {
@@ -24,19 +25,19 @@ const reducer = (state = initialState, action) => {
             return {...state, games: ratingSort}
 
         case "GENRE": 
-            const genreFilter = state.games.filter(item => item.genre === action.payload)
-            return {...state , games : genreFilter }
-
+            const genreFilter = state.games.filter(item => item.genres.some(genre => genre.name === action.payload))
+            return {...state , games: genreFilter }
+    
+//const genreFilter = state.games.filter(item => item.genres.some(genre => genre.name === action.payload));
         case "ORIGIN":
-            const byOrigin = state.games.filter((item) => {
-                if (action.payload === "API") {
-                  return typeof item.id === "number";
-                } else if (action.payload === "DB") {
-                  return typeof item.id === "string";
-                }
-                return true;
-              });
+            let byOrigin = [...state.games]
+            if(action.payload === "API"){
+              byOrigin = byOrigin.filter(item => typeof item.id === "number")
+            } else if (action.payload === "DB"){
+              byOrigin = byOrigin.filter(item => typeof item.id === "string")
+            }
             return { ...state, games: byOrigin };
+
         case "GET_GAMES":
           return {...state, games: action.payload}
         default:

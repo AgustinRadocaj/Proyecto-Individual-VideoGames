@@ -19,7 +19,6 @@ const Detail = () => {
         });
         return setGame({});
      }, [id]);
-console.log(game.Plataformas)
 
 function convertHtmlToText(html) {
     const tempElement = document.createElement("div");
