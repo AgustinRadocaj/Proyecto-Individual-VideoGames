@@ -4,6 +4,11 @@ const { Genre } = require("../db");
 
 const genres = async (req, res) => {
  try {
+
+  const genresFromDatabase = await Genre.findAll();
+
+  if (genresFromDatabase.length === 0){
+
     const response = await axios.get(URL + process.env.DB_API_KEY)
     const genres = response.data.results;
 
@@ -12,6 +17,8 @@ const genres = async (req, res) => {
         nombre: genre.name
       })
     }
+  }
+  
 
     const generos = await Genre.findAll();
     res.status(200).json(generos)

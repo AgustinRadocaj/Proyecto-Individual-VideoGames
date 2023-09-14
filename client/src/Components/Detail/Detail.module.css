@@ -1,0 +1,21 @@
+.container{ 
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 50px;
+}
+.imagen {
+    width: 80%;
+    height: 100%;
+    border-radius: 30px;
+    border: 2px solid #ffc100 ;
+}
+.info {
+    color: #ff0000;
+    font-size: 13px;
+    border: 2px solid #ffc100 ;
+    width: 110%;
+    margin-left: 10px;
+    border-radius: 10px;
+}

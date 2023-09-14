@@ -1,4 +1,5 @@
 import axios from "axios"
+
 export const alfaOrder = (orden) => ({
     type: "ALFA_ORDER",
     payload: orden
@@ -34,5 +35,13 @@ export const getByName = (name) => {
         const response = await axios.get(`http://localhost:3001/videogames/name/${name}`)
         const data = response.data
         dispatch({type: "GET_NAME", payload: data})
+    }
+}
+
+export const getGenres = () => {
+    return async function (dispatch){
+        const response = await axios.get("http://localhost:3001/genres")
+        const data = response.data
+        dispatch({type: "GET_GENRES", payload: data})
     }
 }

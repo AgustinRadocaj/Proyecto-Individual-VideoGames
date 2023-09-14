@@ -20,28 +20,42 @@ const Cards = ({games}) => {
    return (
     <div className={styles.info}>
       {displayedGames.map((game) => (
-        <Card
+        <Card 
           key={game.id}
           id={game.id}
-          title={game.name}
-          image={game.background_image}
-          genres={game.genres}
+          nombre={game.nombre}
+          imagen={game.imagen}
+          generos={game.generos}
         />
       ))}
 
       <div className={styles.pagination}>
-        <button
-          onClick={() => changePage(currentPage - 1)}
-          disabled={currentPage === 1}
-        >
-          Anterior
+      <button 
+      className={styles.button} 
+      onClick={() => changePage(1)}
+      disabled={currentPage === 1}
+      >
+        Primera
         </button>
-        <span>Página {currentPage}</span>
-        <button
-          onClick={() => changePage(currentPage + 1)}
-          disabled={endIndex >= games.length}
+        <button className={styles.button} 
+        onClick={() => changePage(currentPage - 1)}
+        disabled={currentPage === 1}
         >
-          Siguiente
+        Anterior
+        </button>
+        <span className={styles.span}>Página {currentPage}</span>
+        <button className={styles.button}
+        onClick={() => changePage(currentPage + 1)}
+        disabled={endIndex >= games.length}
+        >
+        Siguiente
+        </button>
+        <button 
+        className={styles.button}
+        onClick={() => changePage(Math.ceil(games.length / pageSize))}
+        disabled={currentPage === Math.ceil(games.length / pageSize)}
+        >
+        Última
         </button>
       </div>
     </div>

@@ -1,8 +1,12 @@
 import { alfaOrder, ratingOrder, originFilter, genreFilter } from "../../Redux/actions"
-import {useState} from "react"
+import {useState, useEffect} from "react"
 import {useDispatch} from "react-redux"
+import styles from "./Filtros.module.css"
 
-const Filtros = () => {
+
+
+const Filtros = ({genres}) => {
+
     const [alfa, setAlfa] = useState("A")
     const [rating, setRating] = useState("A")
     const [origin, setOrigin] = useState("Todos")
@@ -43,47 +47,34 @@ const Filtros = () => {
 
 
     return (
-<div className="container">
-    <h1>Alfa</h1>
-    <select id="Alfabetico" value={alfa} onChange={alfaHandle}>
-        <option value="A">Ascendente</option>
-        <option value="D">Descendente</option>
+<div className={styles.container}>
+    
+    <select className={styles.select} value={alfa} onChange={alfaHandle}>
+        <option value="A">A-Z</option>
+        <option value="D">Z-A</option>
     </select>
-    <h1>Rating</h1>
-    <select id="Rating" value={rating} onChange={ratingHandle}>
-        <option value="A">Ascendente</option>
-        <option value="D">Descendente</option>
+    <select  className={styles.select} value={rating} onChange={ratingHandle}>
+        <option value="A">1-5</option>
+        <option value="D">5-1</option>
     </select>
-    <select value={origin} onChange={originHandle}>
+    <select className={styles.select} value={origin} onChange={originHandle}>
         <option value="Todos">Todos</option>
         <option value="API">API</option>
         <option value="DB">Base de datos</option>
     </select>
-    <select value={genre} onChange={genreHandle}>
-        <option value="Adventure">Adventure</option>
-        <option value="Indie">Indie</option>
-        <option value="Action">Action</option>
-        <option value="Shooter">Shooter</option>
-        <option value="Strategy">Strategy</option>
-        <option value="RPG">RPG</option>
-        <option value="Puzzle">Puzzle</option>
-        <option value="Simulation">Simulation</option>
-        <option value="massively multiplayer">MMO</option>
-        <option value="Casual">Casual</option>
-        <option value="Plataformer">Plataformer</option>
-        <option value="Arcade">Arcade</option>
-        <option value="Fighting">Fighting</option>
-        <option value="Sports">Sports</option>
-        <option value="Racing">Racing</option>
-        <option value="Educational">Educational</option>
-        <option value="Board games">Board</option>
-        <option value="Family">Family</option>
-        <option value="Card">Card</option>
-    </select>
+    <select className={styles.select} value={genre} onChange={genreHandle}>
+    <option value="Todos">Todos</option>
+        {genres.map((genreOption) => (
+    <option key={genreOption.id} value={genreOption.nombre}>
+      {genreOption.nombre}
+    </option>
+  ))}
+</select>
 </div>
     )
 }
 
+           
+
 export default Filtros
-    
     

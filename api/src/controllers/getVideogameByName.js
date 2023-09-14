@@ -23,6 +23,7 @@ const getVideogamesByName = async (req, res) => {
 
     const mergedGames = [
       ...dbGames.map((dbGame) => ({
+        id: dbGame.id,
         nombre: dbGame.nombre,
         descripcion: dbGame.descripcion,
         plataformas: dbGame.plataformas,
@@ -32,6 +33,7 @@ const getVideogamesByName = async (req, res) => {
         generos: dbGame.generos.split(', '),
       })),
       ...apiGames.map((apiGame) => ({
+        id: apiGame.id,
         nombre: apiGame.name,
         descripcion: apiGame.description,
         plataformas: apiGame.platforms.map((platform) => platform.platform.name).join(', '),

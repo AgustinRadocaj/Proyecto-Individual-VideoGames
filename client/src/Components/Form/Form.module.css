@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Handjet:wght@300&family=Press+Start+2P&display=swap');
+.wraper {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+}
+.container {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    background-color: #ff0000;
+    width: 95%;
+    height: 550px;
+    border-radius: 10px;
+}
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+.generos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+}
+.submit {
+    width: 85px;
+    height: 25px;
+    border: 2px solid black;
+    border-radius: 15px;
+    background-color: white;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 11px;
+}

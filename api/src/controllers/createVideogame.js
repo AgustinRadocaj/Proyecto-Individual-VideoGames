@@ -13,6 +13,8 @@ const createVideogame = async (req, res) => {
             rating 
         });
 
+        
+
         res.status(201).json(nuevoVideogame)
     } catch (error) {
         console.error(error);

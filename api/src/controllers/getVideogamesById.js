@@ -16,6 +16,7 @@ const getVideogameById = async (req, res) => {
     if (dbGame) {
       
       const responseObject = {
+        id: dbGame.id,
         nombre: dbGame.nombre,
         descripcion: dbGame.descripcion,
         plataformas: dbGame.plataformas,
@@ -33,6 +34,7 @@ const getVideogameById = async (req, res) => {
       if (apiGame) {
         
         const responseObject = {
+          id: apiGame.id,
           nombre: apiGame.name,
           descripcion: apiGame.description,
           plataformas: apiGame.platforms.map((platform) => platform.platform.name).join(', '),

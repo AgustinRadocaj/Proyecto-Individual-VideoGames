@@ -1,58 +1,76 @@
 const initialState = {
-    games: []
+    games: [],
+    originalGames: [],
+    genres: []
 }
 
 const reducer = (state = initialState, action) => {
-    switch(action.type){
-
-        case "ALFA_ORDER":
-            const alfaSort = [...state.games];
-            if (action.payload === "A") {
-              alfaSort.sort((a, b) => a.name.localeCompare(b.name));
-            } else if (action.payload === "D") {
-              alfaSort.sort((a, b) => b.name.localeCompare(a.name));
-            }
-            return { ...state, games: alfaSort };
-
-        case "RATING_ORDER":
-           const ratingSort = [...state.games]
-           if(action.payload === "A"){
-            ratingSort.sort((a, b) => a.rating - b.rating)
-            } else if (action.payload === "D"){
-            ratingSort.sort((a, b) => b.rating - a.rating)
-            }
-            return {...state, games: ratingSort}
-
-        case "GENRE": 
-            const genreFilter = state.games.filter(item => item.genres.some(genre => genre.name === action.payload))
-            return {...state , games: genreFilter }
+  
+  switch (action.type) {
     
+    case "ALFA_ORDER":
+      const alphaSort = [...state.originalGames];
+      if (action.payload === "A") {
+        alphaSort.sort((a, b) => a.nombre.localeCompare(b.nombre));
+      } else if (action.payload === "D") {
+        alphaSort.sort((a, b) => b.nombre.localeCompare(a.nombre));
+      } 
+      return { ...state, originalGames: alphaSort };
 
-        case "ORIGIN":
-            let byOrigin = [...state.games]
-            if(action.payload === "API"){
-              byOrigin = byOrigin.filter(item => typeof item.id === "number")
-            } else if (action.payload === "DB"){
-              byOrigin = byOrigin.filter(item => typeof item.id === "string")
-            }
-            return { ...state, games: byOrigin };
-
-        case "GET_GAMES":
-          return {...state, games: action.payload}
-
-        case "GET_NAME":
-          return {...state, games: action.payload}
-          
-          default:
-                return state;
+    case "RATING_ORDER":
+      const ratingSort = [...state.originalGames];
+      if (action.payload === "A") {
+        ratingSort.sort((a, b) => a.rating - b.rating);
+      } else if (action.payload === "D") {
+        ratingSort.sort((a, b) => b.rating - a.rating);
       }
-  };
+      return { ...state, originalGames: ratingSort };
+      
+      case "GENRE":
+        const allVideoGames = state.games;
+        if(action.payload === "Todos"){
+          return{...state, originalGames:allVideoGames}
+        }
+        const filteredArr = 
+        allVideoGames.filter((item) => item.generos.some((genre) => genre === action.payload));
+        return {...state, games: state.games, originalGames:filteredArr}
 
+      case "ORIGIN":
+          let byOrigin
+          if (action.payload === "API") {
+            byOrigin = state.games.filter((item) => typeof item.id === "number");
+            return {...state, originalGames: byOrigin}
+          } else if (action.payload === "DB") {
+            byOrigin = state.games.filter((item) => typeof item.id === "string");
+            return {...state, originalGames: byOrigin}
+          } else if (action.payload === "Todos") {
+            byOrigin = state.games
+            return {...state, originalGames: byOrigin}
+          }
+          
+          case "GET_GAMES":
+              return {...state, games: action.payload, originalGames: action.payload}
     
-        
-export default reducer;
+          case "GET_NAME":
+              return {...state, originalGames: action.payload}
+          
+          case "GET_GENRES":
+            if(state.genres.length <= 0){
+              return {...state, genres: action.payload}
+            }
+            
+            default:
+                return state;
+            }
+        };
+      
+      export default reducer;
+              
     
-        
+
+      
+    
+    
         
         
         

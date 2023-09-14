@@ -1,5 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Handjet:wght@300&family=Press+Start+2P&display=swap');
 .info {
-    display: grid;
-    grid-template-columns: repeat(4, 150px);
-    grid-gap: 100px;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    gap: 2em;
+}
+.button {
+    width: 150px;
+    height: 25px;
+    border: 2px solid #ff8200;
+    border-radius: 15px;
+    background-color: white;
+    font-family: 'Press Start 2P', cursive;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+.button:hover {
+    transition: 0.5s;
+    border: 2px solid #ff0000;
+    box-shadow: 0 0 15px #ff0000;
+}
+
+.span {
+    color: white;
 }

@@ -1,8 +1,46 @@
-.container {
-    width: 100px;
-    height: 100px;
+.card {
+    box-sizing: border-box;
+    width: 220px;
+    height: 300px;
+    background: white;
+    border: 2px solid #ffc100;
+    backdrop-filter: blur(6px);
+    border-radius: 17px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.5s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    font-weight: bolder;
+    color: black;
+  }
+  
+  .card:hover {
+    border: 2px solid #ff0000;
+    box-shadow: 0 0 15px #ff0000;
+    transform: scale(1.05);
+  }
+  
+
+.imagen {
+    width :215px;
+    height:235px;
+    border-radius: 10px;
 }
-.image {
-    width: 40px;
-    height: 30px;
+
+.nombre{
+    font-size: 10px;
+    text-decoration: none;
+    color: black;
+}
+.genero {
+  max-width: 180px;
+  font-size: 8px;
+}
+
+.link{
+    text-decoration: none;
 }

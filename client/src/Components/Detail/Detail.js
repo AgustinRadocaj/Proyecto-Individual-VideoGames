@@ -2,6 +2,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
+import styles from "./Detail.module.css"
 
 const Detail = () => {
 
@@ -26,18 +27,17 @@ function convertHtmlToText(html) {
     return tempElement.textContent || tempElement.innerText || "";
   }
 return (
-    <div className="container">
-       <div className="imagen"><img src={game?.Imagen} alt="Imagen"></img></div>
-        <div>
+    <div className={styles.container}>
+        <div className={styles.info}>
             <h2>{game?.id}</h2>
-            <h2>Nombre:{game?.Nombre}</h2>
-            <h2>Plataformas:{game?.Plataformas?.map(plat => (plat.platform.name))}</h2>
-            <h2>Descripción:</h2>
-            <p>{convertHtmlToText(game?.Descripción)}</p>
-            <h2>Fecha de lanzamiento:{game?.Lanzamiento}</h2>
-            <h2>Rating:{game?.Rating}</h2>
-           <h2>Géneros:{game?.Generos?.map(gen => gen.name)}</h2>
+            <h2>{game?.nombre}</h2>
+            <h2>{game?.plataformas}</h2>
+            <h2>{game?.fechaLanzamiento}</h2>
+            <h2>{game?.rating}</h2>
+            <h2>{game?.generos?.map(gen => gen).join("/")}</h2>
+            <div dangerouslySetInnerHTML={{ __html: game?.descripcion }} />
         </div>
+         <div className={styles.imagenContainer}><img src={game?.imagen} alt="Imagen" className={styles.imagen}></img></div>
     </div>
 )
 }
