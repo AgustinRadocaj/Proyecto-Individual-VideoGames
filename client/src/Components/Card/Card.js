@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import styles from "./Card.module.css"
 
 const Card = ({id, image, title, genres}) =>{
-console.log(genres)
+
     return (
         <div className={styles.container}>
             <Link to={`/detail/${id}`}><div className="cards">

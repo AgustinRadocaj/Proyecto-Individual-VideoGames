@@ -1,1 +1,46 @@
-//Form
+/*/Form
+//GET Generos
+//Arreglar el get videojuegos para que me de 100
+//Conectar las rutas con el database 3
+//estilos
+
+
+//colores*/ 
+
+/*#ff0000 red
+#ffc100 yellow
+#ff8200 naranjita
+#ffeaae  pseudo white
+@import url('https://fonts.googleapis.com/css2?family=Handjet:wght@300&family=Press+Start+2P&display=swap');
+font-family: 'Press Start 2P', cursive;
+*/
+
+/*
+ useEffect(()=> {
+    axios.get("http://localhost:3001/genres")
+    .then((response) => setGenres(response.data))
+  }, [])
+  <label htmlFor="genres">Géneros:</label>
+  {genres.map((genre) => (
+      <label key={genre.id}>
+      <input
+      type="checkbox"
+      name="genres"
+      value={genre.nombre}
+      onChange={handleChange}
+      checked={formData.genres.includes(genre.nombre)}
+      />
+      {genre.nombre}
+      </label>
+      */
+
+      /*
+      {
+  "nombre": "The Legend of Zelda: Breath of the Wild",
+  "descripcion": "Un emocionante juego de aventuras de mundo abierto",
+  "plataformas": "Nintendo Switch, Wii U",
+  "imagen": "https://example.com/zelda_image.jpg",
+  "fechaLanzamiento": "3 de marzo de 2017",
+  "rating": 9.5
+  "generos": array de generos
+}*/

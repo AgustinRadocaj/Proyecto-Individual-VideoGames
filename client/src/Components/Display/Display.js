@@ -2,6 +2,7 @@ import React, {useEffect} from "react"
 import {useDispatch, useSelector} from "react-redux"
 import Filtros from "../Filtros/Filtros"
 import Cards from "../Cards/Cards"
+import SearchBar from "../SearchBar/SearchBar"
 import { getGames } from "../../Redux/actions"
 import styles from "./Display.module.css"
 
@@ -17,6 +18,7 @@ const Display = () => {
     
     return(
         <div>
+            <SearchBar/>
             <Filtros/>
             <div className={styles.gamesContainer}>
                 <Cards games={games}/>    

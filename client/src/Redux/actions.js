@@ -28,3 +28,11 @@ export const getGames = () => {
         dispatch({type: "GET_GAMES", payload: games})
     }
 }
+
+export const getByName = (name) => {
+    return async function (dispatch){
+        const response = await axios.get(`http://localhost:3001/videogames/name/${name}`)
+        const data = response.data
+        dispatch({type: "GET_NAME", payload: data})
+    }
+}

@@ -1,6 +1,5 @@
 const initialState = {
-    games: [], 
-    genres: []
+    games: []
 }
 
 const reducer = (state = initialState, action) => {
@@ -28,7 +27,7 @@ const reducer = (state = initialState, action) => {
             const genreFilter = state.games.filter(item => item.genres.some(genre => genre.name === action.payload))
             return {...state , games: genreFilter }
     
-//const genreFilter = state.games.filter(item => item.genres.some(genre => genre.name === action.payload));
+
         case "ORIGIN":
             let byOrigin = [...state.games]
             if(action.payload === "API"){
@@ -40,10 +39,16 @@ const reducer = (state = initialState, action) => {
 
         case "GET_GAMES":
           return {...state, games: action.payload}
-        default:
-              return state;
-    }
-};
+
+        case "GET_NAME":
+          return {...state, games: action.payload}
+          
+          default:
+                return state;
+      }
+  };
+
+    
         
 export default reducer;
     

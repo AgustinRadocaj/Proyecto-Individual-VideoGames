@@ -1,29 +1,56 @@
 const axios = require('axios');
 const URL = "https://api.rawg.io/api/games/"
-//https://api.rawg.io/api/games/{id}"
-
+const{Videogame} = require("../db")
 
 const getVideogameById = async (req, res) => {
-    const  id  = req.params.idVideogame;
+    const { idVideogame } = req.params;
+
+  try {
     
-    try {
-        const response = await axios.get(`${URL}${id}`+ '?key=' + process.env.DB_API_KEY);
-        const data = response.data;
-        const game = {
-            id: data.id,
-            Nombre: data.name,
-            Descripción: data.description,
-            Plataformas: data.platforms,
-            Imagen: data.background_image,
-            Lanzamiento: data.released,
-            Rating: data.rating,
-            Generos: data.genres
+    const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+    if (uuidRegex.test(idVideogame)) {
+      const dbGame = await Videogame.findOne({
+        where: { id: idVideogame },
+      });
+
+    if (dbGame) {
+      
+      const responseObject = {
+        nombre: dbGame.nombre,
+        descripcion: dbGame.descripcion,
+        plataformas: dbGame.plataformas,
+        imagen: dbGame.imagen,
+        fechaLanzamiento: dbGame.fechaLanzamiento,
+        rating: dbGame.rating,
+        generos: dbGame.generos.split(', '), 
+      };
+      res.json(responseObject);
+    }} else {
+      
+      const apiResponse = await axios.get(URL + `${idVideogame}` + `?key=` + process.env.DB_API_KEY);
+      const apiGame = apiResponse.data;
+
+      if (apiGame) {
+        
+        const responseObject = {
+          nombre: apiGame.name,
+          descripcion: apiGame.description,
+          plataformas: apiGame.platforms.map((platform) => platform.platform.name).join(', '),
+          imagen: apiGame.background_image,
+          fechaLanzamiento: apiGame.released,
+          rating: apiGame.rating,
+          generos: apiGame.genres.map((genre) => genre.name),
         };
-        console.log(data.platforms)
-        res.json(game);
-    } catch (error) {
-        res.json(error.message);
+        res.json(responseObject);
+      } else {
+        
+        res.status(404).json({ mensaje: 'Juego no encontrado' });
+      }
     }
+  } catch (error) {
+    console.error('Error al obtener el juego por ID', error);
+    res.status(500).json({ mensaje: 'Error al obtener el juego por ID' });
+  }
 }
 
 module.exports = getVideogameById;

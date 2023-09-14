@@ -15,11 +15,11 @@ module.exports = (sequelize) => {
     allowNull: false,
   },
   descripcion: {
-    type: DataTypes.TEXT,
+    type: DataTypes.STRING,
     allowNull: false,
   },
   plataformas: {
-    type: DataTypes.JSONB, 
+    type: DataTypes.STRING, 
     allowNull: false,
   },
   imagen: {
@@ -27,7 +27,7 @@ module.exports = (sequelize) => {
     allowNull: false,
   },
   fechaLanzamiento: {
-    type: DataTypes.DATE,
+    type: DataTypes.STRING,
     allowNull: false,
   },
   rating: {

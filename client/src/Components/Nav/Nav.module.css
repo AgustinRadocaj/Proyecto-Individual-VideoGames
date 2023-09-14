@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Handjet:wght@300&family=Press+Start+2P&display=swap');
+.nav {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+.button {
+    width: 85px;
+    height: 25px;
+    border: 2px solid #ff8200;
+    border-radius: 15px;
+    background-color: white;
+}
+.button:hover {
+    transition: 0.5s;
+    border: 2px solid #ff0000;
+    box-shadow: 0 0 15px #ff0000;
+}
+.button a {
+    text-decoration: none;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 10px;
+    color: black;
+}

@@ -1,35 +1,36 @@
-import React, {useState}  from "react";
-import axios from "axios";
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import {getByName} from "../../Redux/actions";
+import styles from "./SearchBar.module.css"
 
-const URL = `https://api.rawg.io/api/games`
+const SearchBar = () => {
+    const [search, setSearch] = useState("")
+    const Dispatch = useDispatch()
 
-const searchBar = () => {
-    const [searchTerm, setSearchTerm] = useState(""); //estado para guardar el input de busqueda
-    const [result, setResult] = useState([]); // estado para guardar los resultados de la busqueda
-  
-    useEffect(() => {
-      const fetchGames = async () => {
-        if (searchTerm.trim() === "") { //condicional para saber si el input esta vacio
-          setResult([]);
-          return;
-        }
-  
-        const response = await axios.get(`${URL}?search=${searchTerm}`);
-        setResult(response.data.results);
-      };
-  
-      fetchGames();
-    }, [searchTerm]);
-
-    return ( 
+    const searchHandle = (event) =>{
+      setSearch(event.target.value)
+      searchChange(event.target.value)
+    }
+    const searchChange = (value) => {
+      Dispatch(getByName(value))
+    }
+    return (
         <div>
-            <input type="text" placeholder="Busca por nombre" onChange={(e) => search(e.target.value)} value={searchTerm}/>
-            <ul>
-                {result.map((game) => (
-                <li key={game.id}>{game.name}{game.genre}{game.console}</li>))}
-            </ul>
+            <input
+                className={styles.Search}
+                type="text"
+                placeholder="Busca por nombre"
+                onChange={searchHandle}
+                value={search}
+            />
         </div>
-    ) //renderizado del componente (debe mostrar nombre genero y consola)
-}
+    );
+};
 
-export default searchBar;
+export default SearchBar;
+
+
+
+
+
+

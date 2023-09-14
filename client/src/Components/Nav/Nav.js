@@ -1,4 +1,5 @@
 import { Link, useLocation} from "react-router-dom";
+import styles from "./Nav.module.css"
 
 const Nav = () => {
     const location = useLocation();
@@ -9,15 +10,15 @@ const Nav = () => {
       return null;
     }
     return(
-        <div className="nav">
-            <button>
-                <Link to="/home">Home</Link>
+        <div className={styles.nav}>
+            <button className={styles.button}>
+                <Link to="/home">HOME</Link>
             </button>
-            <button>
-                <Link to="/about">About</Link>
+            <button className={styles.button}>
+                <Link to="/about">ABOUT</Link>
             </button>
-            <button>
-                <Link to="/form">Agregar juego</Link>
+            <button className={styles.button}>
+                <Link to="/form">AGREGAR</Link>
             </button>
         </div>
     )
