@@ -9,6 +9,27 @@ const Form = () => {
 
   const dispatch = useDispatch()
   const generos = useSelector((state) => state.genres)
+  const platforms = [
+    "PC",
+    "PlayStation 5",
+    "Xbox One",
+    "PlayStation 4",
+    "Xbox Series S/X",
+    "Nintendo Switch",
+    "iOS",
+    "Android",
+    "Nintendo 3DS",
+    "macOS",
+    "Linux",
+    "Xbox 360",
+    "PlayStation 3",
+    "PlayStation 2",
+    "PlayStation",
+    "Wii U",
+    "Wii",
+    "GameCube",
+    "Nintendo 64",
+    "Game Boy Advance",];
 
   useEffect(()=> {
     dispatch(getGenres())
@@ -18,33 +39,64 @@ const Form = () => {
     nombre: '',
     imagen: '',
     descripcion: '',
-    plataformas: '',
+    plataformas: [],
     fechaLanzamiento: '',
     rating: 0,
-    genres: []
+    generos: []
   });
   
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+    const { name, value, checked } = e.target;
+    if (name === 'generos') {
+      if (checked) {
+        // Si el checkbox se selecciona, agregamos el valor al array
+        setFormData((prevData) => ({
+          ...prevData,
+          generos: [...prevData.generos, value],
+        }));
+      } else {
+        // Si el checkbox se deselecciona, quitamos el valor del array
+        setFormData((prevData) => ({
+          ...prevData,
+          generos: prevData.generos.filter((genre) => genre !== value),
+        }));
+      }
+    } else if(name === "plataformas"){
+      if (checked) {
+        // Si se selecciona una plataforma, agrégala al array
+        setFormData((prevData) => ({
+          ...prevData,
+          plataformas: [...prevData.plataformas, value],
+        }));
+      } else {
+        // Si se deselecciona una plataforma, quítala del array
+        setFormData((prevData) => ({
+          ...prevData,
+          plataformas: prevData.plataformas.filter((platform) => platform !== value),
+        }));
+      }
+    }
+     else {
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if(formData.nombre.length <= 0){
-      alert("El nombre no puede estar vacio!");}
-    else if(formData.descripcion.length > 50){
-      alert("La descripcion no debe ser mayor a 50 caracteres")}
-    else if(formData.plataformas.length <= 0){
-      alert("Debe tener al menos una plataforma")}
-    else if(formData.rating > 0){
-      alert("El rating no puede ser mayor a 5")}
-    else if(formData.fechaLanzamiento.length <= 0){
-      alert("Debe tener fecha de lanzamiento")}
-    else {
+    // if(formData.nombre.length <= 0){
+    //   alert("El nombre no puede estar vacio!");}
+    // else if(formData.descripcion.length > 50){
+    //   alert("La descripcion no debe ser mayor a 50 caracteres")}
+    // else if(formData.plataformas.length <= 0){
+    //   alert("Debe tener al menos una plataforma")}
+    // else if(formData.rating > 0){
+    //   alert("El rating no puede ser mayor a 5")}
+    // else if(formData.fechaLanzamiento.length <= 0){
+    //   alert("Debe tener fecha de lanzamiento")}
+    // else {
     try {
       const response = await fetch("http://localhost:3001/videogames", {
         method: 'POST',
@@ -56,13 +108,14 @@ const Form = () => {
 
       if (response.ok) {
         console.log('Juego creado con éxito');
+        console.log(formData)
       } else {
         console.error('Error al crear el juego');
       }
     } catch (error) {
       console.error('Error al crear el juego', error);
     }
-  }
+  
   };
 
   return (
@@ -72,81 +125,52 @@ const Form = () => {
       <form onSubmit={handleSubmit} className={styles.form}>
         <div>
           <label htmlFor="nombre">Nombre:</label>
-          <input
-            type="text"
-            id="nombre"
-            name="nombre"
-            value={formData.nombre}
-            onChange={handleChange}
-            
-          />
+          <input type="text" id="nombre" name="nombre" value={formData.nombre} onChange={handleChange}/>
         </div>
+
         <div>
           <label htmlFor="imagen">Imagen (URL):</label>
-          <input
-            type="text"
-            id="imagen"
-            name="imagen"
-            value={formData.imagen}
-            onChange={handleChange}
-            
-          />
+          <input type="text" id="imagen" name="imagen" value={formData.imagen} onChange={handleChange}/>
         </div>
+
         <div>
           <label htmlFor="descripcion">Descripción:</label>
-          <textarea
-            id="descripcion"
-            name="descripcion"
-            value={formData.descripcion}
-            onChange={handleChange}
-            
-          />
+          <textarea id="descripcion" name="descripcion" value={formData.descripcion} onChange={handleChange}/>
         </div>
-        <div>
+
           <label htmlFor="plataformas">Plataformas:</label>
-          <input
-            type="text"
+        <div className={styles.plataformas}>
+          {platforms.map((plat, index) => (
+            <label key={index}>
+            <input type="checkbox"
             id="plataformas"
             name="plataformas"
-            value={formData.plataformas}
+            value={plat}
             onChange={handleChange}
-            
-          />
-        </div>
+            checked={formData.plataformas.includes(plat)}/>
+            {plat}</label>
+            ))}</div>
+
         <div>
           <label htmlFor="fechaLanzamiento">Fecha de Lanzamiento:</label>
-          <input
-            type="text"
-            id="fechaLanzamiento"
-            name="fechaLanzamiento"
-            value={formData.fechaLanzamiento}
-            onChange={handleChange}
-            
-          />
+          <input type="date" id="fechaLanzamiento" name="fechaLanzamiento" value={formData.fechaLanzamiento} onChange={handleChange} />
         </div>
+
         <div>
           <label htmlFor="rating">Rating:</label>
-          <input
-            type="number"
-            id="rating"
-            name="rating"
-            step="0.1"
-            value={formData.rating}
-            onChange={handleChange}
-            
-          />
+          <input type="number" id="rating" name="rating" step="0.1" value={formData.rating} onChange={handleChange}/>
         </div>
         
-        <label htmlFor="genres">Géneros:</label>
+        <label htmlFor="generos">Géneros:</label>
         <div className={styles.generos}>
         {generos.map((genre) => (
         <label key={genre.id}>
         <input
         type="checkbox"
-        name="genres"
+        name="generos"
         value={genre.nombre}
         onChange={handleChange}
-        checked={formData.genres.includes(genre.nombre)}
+        checked={formData.generos.includes(genre.nombre)}
         />
         {genre.nombre}
         </label>

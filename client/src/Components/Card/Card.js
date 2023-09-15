@@ -6,9 +6,9 @@ const Card = ({id, imagen, nombre, generos}) =>{
     return (
         <div className={styles.card}>
             <Link to={`/detail/${id}`} className={styles.link}>
-            <h2 className={styles.nombre}>{nombre}</h2></Link>
+            <h2 className={styles.nombre}>{nombre}</h2>
             <h2 className={styles.genero}>{generos.join("/")}</h2>
-            <img className={styles.imagen} src={imagen} alt={nombre} />
+            <img className={styles.imagen} src={imagen} alt={nombre} /></Link>
         </div>
     )
 }

@@ -1,6 +1,6 @@
 const axios = require('axios');
 const URL = "https://api.rawg.io/api/games/"
-const{Videogame} = require("../db")
+const{Videogame, Genres} = require("../db")
 
 const getVideogameById = async (req, res) => {
     const { idVideogame } = req.params;
@@ -11,6 +11,7 @@ const getVideogameById = async (req, res) => {
     if (uuidRegex.test(idVideogame)) {
       const dbGame = await Videogame.findOne({
         where: { id: idVideogame },
+        include: Genres,
       });
 
     if (dbGame) {
@@ -23,7 +24,7 @@ const getVideogameById = async (req, res) => {
         imagen: dbGame.imagen,
         fechaLanzamiento: dbGame.fechaLanzamiento,
         rating: dbGame.rating,
-        generos: dbGame.generos.split(', '), 
+        generos: dbGame.Genres.map((genre => genre.nombre)), 
       };
       res.json(responseObject);
     }} else {
@@ -37,7 +38,7 @@ const getVideogameById = async (req, res) => {
           id: apiGame.id,
           nombre: apiGame.name,
           descripcion: apiGame.description,
-          plataformas: apiGame.platforms.map((platform) => platform.platform.name).join(', '),
+          plataformas: apiGame.platforms.map((platform) => platform.platform.name),
           imagen: apiGame.background_image,
           fechaLanzamiento: apiGame.released,
           rating: apiGame.rating,

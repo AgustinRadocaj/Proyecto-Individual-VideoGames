@@ -1,6 +1,6 @@
 const axios = require('axios');
 const URL = "https://api.rawg.io/api/games?search=";
-const { Videogame } = require("../db");
+const { Videogame, Genres } = require("../db");
 const { Op } = require('sequelize');
 
 const getVideogamesByName = async (req, res) => {
@@ -14,8 +14,10 @@ const getVideogamesByName = async (req, res) => {
           [Op.iLike]: `%${name}%`, 
         },
       },
+      include: Genres,
     });
 
+    console.log(dbGames)
 
     const apiResponse = await axios.get(URL + name + `&key=` + process.env.DB_API_KEY);
 
@@ -30,13 +32,13 @@ const getVideogamesByName = async (req, res) => {
         imagen: dbGame.imagen,
         fechaLanzamiento: dbGame.fechaLanzamiento,
         rating: dbGame.rating,
-        generos: dbGame.generos.split(', '),
+        generos: dbGame.Genres.map((genre) => genre.nombre)
       })),
       ...apiGames.map((apiGame) => ({
         id: apiGame.id,
         nombre: apiGame.name,
         descripcion: apiGame.description,
-        plataformas: apiGame.platforms.map((platform) => platform.platform.name).join(', '),
+        plataformas: apiGame.platforms.map((platform) => platform.platform.name),
         imagen: apiGame.background_image,
         fechaLanzamiento: apiGame.released,
         rating: apiGame.rating,
@@ -45,7 +47,7 @@ const getVideogamesByName = async (req, res) => {
     ];
 
     const first15Results = mergedGames.slice(0, 15);
-
+    console.log(dbGames)
     res.json(first15Results);
   } catch (error) {
     console.error('Error al buscar juegos por nombre', error);

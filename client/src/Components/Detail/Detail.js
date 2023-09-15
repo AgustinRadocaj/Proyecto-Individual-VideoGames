@@ -29,9 +29,9 @@ function convertHtmlToText(html) {
 return (
     <div className={styles.container}>
         <div className={styles.info}>
-            <h2>{game?.id}</h2>
+            {/* <h2>{game?.id}</h2> */}
             <h2>{game?.nombre}</h2>
-            <h2>{game?.plataformas}</h2>
+            <h2>{game?.plataformas?.map(plat => plat).join("/")}</h2>
             <h2>{game?.fechaLanzamiento}</h2>
             <h2>{game?.rating}</h2>
             <h2>{game?.generos?.map(gen => gen).join("/")}</h2>

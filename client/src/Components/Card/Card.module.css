@@ -39,8 +39,9 @@
 .genero {
   max-width: 180px;
   font-size: 8px;
+  text-decoration: none;
+  color: black;
 }
-
 .link{
     text-decoration: none;
 }
