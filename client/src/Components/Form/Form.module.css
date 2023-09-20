@@ -11,8 +11,9 @@
     gap: 1em;
     background-color: #ff0000;
     width: 95%;
-    height: 550px;
+    height: 630px;
     border-radius: 10px;
+    margin-bottom: 10px;
 }
 .form {
     display: flex;
@@ -20,6 +21,11 @@
     gap: 1em;
 }
 .generos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+}
+.plataformas {
     display: flex;
     flex-wrap: wrap;
     gap: 1em;
