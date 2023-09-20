@@ -34,6 +34,7 @@ const Form = () => {
   useEffect(()=> {
     dispatch(getGenres())
   })
+ 
 
   const [formData, setFormData] = useState({
     nombre: '',
@@ -84,19 +85,36 @@ const Form = () => {
     }
   };
 
+  function esURLValida(url) {
+    var urlRegex = /^(http|https):\/\/[^\s/$.?#].[^\s]*$/;
+    return urlRegex.test(url);
+  }
+
+  function tieneCaracteresEspeciales(cadena) {
+    var regex = /[^a-zA-Z0-9]/;
+    return regex.test(cadena);
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // if(formData.nombre.length <= 0){
-    //   alert("El nombre no puede estar vacio!");}
-    // else if(formData.descripcion.length > 50){
-    //   alert("La descripcion no debe ser mayor a 50 caracteres")}
-    // else if(formData.plataformas.length <= 0){
-    //   alert("Debe tener al menos una plataforma")}
-    // else if(formData.rating > 0){
-    //   alert("El rating no puede ser mayor a 5")}
-    // else if(formData.fechaLanzamiento.length <= 0){
-    //   alert("Debe tener fecha de lanzamiento")}
-    // else {
+    if(formData.nombre.length <= 0){
+      alert("El nombre no puede estar vacio!");}
+    else if(tieneCaracteresEspeciales(formData.nombre)){
+      alert("El nombre no puede contener caracteres especiales")}
+    else if (!esURLValida(formData.imagen)){
+      alert("La imagen no es una URL")}
+    else  if(formData.descripcion.length <=0 || formData.descripcion.length > 50){
+      alert("La descripcion no debe ser mayor a 50 caracteres")}
+    else  if(formData.plataformas.length <= 0){
+      alert("Debe tener al menos una plataforma")}
+    else  if(formData.rating > 5){
+      alert("El rating no puede ser mayor a 5")}
+    else  if(formData.fechaLanzamiento.length <= 0){
+      alert("Debe tener fecha de lanzamiento")}
+    else if(formData.generos.length <= 0){
+      alert("Debe tener al menos un genero")
+    }
+    else{
     try {
       const response = await fetch("http://localhost:3001/videogames", {
         method: 'POST',
@@ -108,6 +126,7 @@ const Form = () => {
 
       if (response.ok) {
         console.log('Juego creado con éxito');
+        alert("Juego creado con exito!")
         console.log(formData)
       } else {
         console.error('Error al crear el juego');
@@ -115,7 +134,7 @@ const Form = () => {
     } catch (error) {
       console.error('Error al crear el juego', error);
     }
-  
+    }
   };
 
   return (

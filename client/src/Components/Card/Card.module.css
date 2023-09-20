@@ -1,12 +1,11 @@
 .card {
     box-sizing: border-box;
-    width: 220px;
-    height: 300px;
+    width: 260px;
+    height: 330px;
     background: white;
     border: 2px solid #ffc100;
     backdrop-filter: blur(6px);
-    border-radius: 17px;
-    text-align: center;
+    border-radius: 17px; 
     cursor: pointer;
     transition: all 0.5s;
     display: flex;
@@ -23,25 +22,40 @@
     box-shadow: 0 0 15px #ff0000;
     transform: scale(1.05);
   }
+
+  .card:hover .imagen {
+    border: 2px solid #ff0000;
+    box-shadow: 0 0 10px #ff0000;
+
+  }
   
 
 .imagen {
     width :215px;
     height:235px;
     border-radius: 10px;
+    border: 2px solid #ffc100;
+    transition: all 0.5s;
 }
 
 .nombre{
-    font-size: 10px;
+    font-size: 11px;
     text-decoration: none;
     color: black;
 }
 .genero {
-  max-width: 180px;
-  font-size: 8px;
+  width: auto;
+  font-size: 7px;
   text-decoration: none;
   color: black;
 }
 .link{
     text-decoration: none;
+}
+
+.rating{
+  width: auto;
+  text-decoration: none;
+  color: black;
+  font-size: 7px;
 }

@@ -10,7 +10,9 @@ const reducer = (state = initialState, action) => {
     
     case "ALFA_ORDER":
       const alphaSort = [...state.originalGames];
-      if (action.payload === "A") {
+      if(action.payload === "S"){
+        return {...state, originalGames: alphaSort}
+      }else if (action.payload === "A") {
         alphaSort.sort((a, b) => a.nombre.localeCompare(b.nombre));
       } else if (action.payload === "D") {
         alphaSort.sort((a, b) => b.nombre.localeCompare(a.nombre));
@@ -19,7 +21,9 @@ const reducer = (state = initialState, action) => {
 
     case "RATING_ORDER":
       const ratingSort = [...state.originalGames];
-      if (action.payload === "A") {
+      if(action.payload === "S"){
+        return {...state, originalGames: ratingSort}
+      } else if (action.payload === "A") {
         ratingSort.sort((a, b) => a.rating - b.rating);
       } else if (action.payload === "D") {
         ratingSort.sort((a, b) => b.rating - a.rating);

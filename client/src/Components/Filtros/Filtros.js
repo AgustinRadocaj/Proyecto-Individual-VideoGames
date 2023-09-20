@@ -7,8 +7,8 @@ import styles from "./Filtros.module.css"
 
 const Filtros = ({genres}) => {
 
-    const [alfa, setAlfa] = useState("A")
-    const [rating, setRating] = useState("A")
+    const [alfa, setAlfa] = useState("S")
+    const [rating, setRating] = useState("S")
     const [origin, setOrigin] = useState("Todos")
     const [genre, setGenre] = useState("")
     const Dispatch = useDispatch()
@@ -50,10 +50,12 @@ const Filtros = ({genres}) => {
 <div className={styles.container}>
     
     <select className={styles.select} value={alfa} onChange={alfaHandle}>
+        <option value="S">Alfabetico</option>
         <option value="A">A-Z</option>
         <option value="D">Z-A</option>
     </select>
     <select  className={styles.select} value={rating} onChange={ratingHandle}>
+        <option value="S">Rating</option>
         <option value="A">1-5</option>
         <option value="D">5-1</option>
     </select>

@@ -6,10 +6,13 @@
     column-gap: 50px;
 }
 .imagen {
-    width: 80%;
-    height: 100%;
+    max-width: 575px; 
+    max-height: 400px; 
+    width: auto;
+    height: auto;
     border-radius: 30px;
-    border: 2px solid #ffc100 ;
+    border: 2px solid #ffc100;
+    margin-right: 10px;
 }
 .info {
     color: #ff0000;
@@ -18,4 +21,5 @@
     width: 110%;
     margin-left: 10px;
     border-radius: 10px;
+    line-height: 18px;
 }
